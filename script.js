@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskForm = document.getElementById('task-form');
     // Ensure we get the button correctly - checking if we need to be specific? No, ID is unique.
     const addTaskBtn = document.getElementById('add-task-btn');
+    const addTaskBtnInline = document.getElementById('add-task-btn-inline'); // Mobile/Inline Button
     const modal = document.getElementById('task-modal');
     const closeModal = document.querySelector('.close-modal');
     const closeModalBtn = document.querySelector('.close-modal-btn');
