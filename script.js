@@ -24,20 +24,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskStatusInput = document.getElementById('task-status');
 
     // State
-    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    let tasks = [];
+    try {
+        const stored = localStorage.getItem('tasks');
+        tasks = stored ? JSON.parse(stored) : [];
+        if (!Array.isArray(tasks)) tasks = []; // Safety check
+    } catch (e) {
+        console.error('Error parsing tasks:', e);
+        tasks = [];
+        localStorage.removeItem('tasks'); // Reset corrupt data
+    }
+
     let currentFilter = 'all';
     let currentSearch = '';
 
     // --- Initialization ---
 
     // Check Theme
-    const currentTheme = localStorage.getItem('theme');
-    if (currentTheme) {
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        if (currentTheme === 'dark') {
-            themeToggle.innerHTML = '<i class="bx bx-sun"></i>';
+    try {
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {
+                themeToggle.innerHTML = '<i class="bx bx-sun"></i>';
+            }
         }
+    } catch (e) {
+        console.log("Theme init error", e);
     }
+
 
     // Render Initial Tasks
     if (taskList && tasks) renderTasks();
