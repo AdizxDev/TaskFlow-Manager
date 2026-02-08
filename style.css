@@ -1177,27 +1177,30 @@ select option {
         width: auto;
     }
 
-    /* Floating Action Button for Mobile */
+    /* Floating Action Button (FAB) - HIDDEN as requested */
     #add-task-btn {
-        position: fixed;
-        bottom: 2rem;
-        right: 1.5rem;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 999;
-        box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5);
-        font-size: 0;
-        /* Hide text */
+        display: none !important;
     }
 
-    #add-task-btn i {
-        font-size: 2rem;
-        margin: 0;
+    /* Center About Text & Content on Mobile */
+    .about-content {
+        text-align: center;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .bio-text {
+        text-align: center;
+        /* Explicitly center the bio text */
+    }
+
+    .skills-container {
+        justify-content: center;
+        /* Center the skill badges */
     }
 
     /* Adjust header compatibility */
@@ -1205,8 +1208,8 @@ select option {
         margin-bottom: 2rem;
     }
 
-    /* Extra padding at bottom so FAB doesn't cover footer content */
+    /* Restore normal footer padding */
     .footer {
-        padding-bottom: 6rem;
+        padding-bottom: 2rem;
     }
 }
