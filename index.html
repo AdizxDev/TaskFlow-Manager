@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task & Project Manager - Kuliah & Freelance</title>
+    <meta name="description" content="Aplikasi manajemen tugas kuliah dan proyek client freelance.">
+    <!-- Favicon -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M2 7l10-5 10 5-10 5-10-5zm0 9l10 5 10-5M2 12l10 5 10-5'></path></svg>"
+        type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Boxicons for Icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class='bx bxs-layer'></i> ProTasker
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#features" class="nav-link">Fitur</a></li>
+                <li><a href="#tasks" class="nav-link active">Tugas</a></li>
+                <li><a href="#about" class="nav-link">Tentang</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle Dark Mode">
+                    <i class='bx bx-moon'></i>
+                </button>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Atur Tugas Kuliah & <span>Proyek Client</span></h1>
+                <p class="hero-description">
+                    Satu platform untuk semua produktivitasmu. Kelola deadline tugas kuliah, pantau progress freelance,
+                    dan atur jadwal client dengan mudah dan profesional.
+                </p>
+                <a href="#tasks" class="btn btn-primary">Mulai Produktif <i class='bx bx-right-arrow-alt'></i></a>
+            </div>
+            <div class="hero-image">
+                <!-- Illustration placeholder using CSS or SVG could go here, for now a simple evocative colorful block/icon -->
+                <div class="hero-graphic">
+                    <i class='bx bx-briefcase-alt-2'></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Kenapa Pakai TaskManager?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class='bx bx-list-check'></i></div>
+                    <h3>Pencatatan Mudah</h3>
+                    <p>Tambah tugas baru dengan cepat dan detail yang lengkap.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class='bx bx-time-five'></i></div>
+                    <h3>Pantau Deadline</h3>
+                    <p>Jangan sampai terlewat deadline penting mata kuliahmu.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class='bx bx-data'></i></div>
+                    <h3>Simpan Lokal</h3>
+                    <p>Data tersimpan otomatis di browser, aman dan privasi terjaga.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Task Management Section (Core App) -->
+    <section id="tasks" class="app-section">
+        <div class="container">
+            <div class="app-header">
+                <h2 class="section-title">Daftar Tugas Anda</h2>
+            </div>
+
+            <!-- Dashboard Summary Cards -->
+            <div class="dashboard-stats">
+                <div class="stat-card total">
+                    <div class="stat-icon"><i class='bx bx-task'></i></div>
+                    <div class="stat-info">
+                        <h3>Total Tugas</h3>
+                        <p id="total-tasks">0</p>
+                    </div>
+                </div>
+                <div class="stat-card completed">
+                    <div class="stat-icon"><i class='bx bx-check-circle'></i></div>
+                    <div class="stat-info">
+                        <h3>Selesai</h3>
+                        <p id="completed-tasks">0</p>
+                    </div>
+                </div>
+                <div class="stat-card pending">
+                    <div class="stat-icon"><i class='bx bx-time'></i></div>
+                    <div class="stat-info">
+                        <h3>Belum Selesai</h3>
+                        <p id="pending-tasks">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task Filters & Search -->
+            <div class="task-controls">
+                <!-- Additional Inline Add Task Button -->
+                <button id="add-task-btn-inline" class="btn btn-primary">
+                    <i class='bx bx-plus'></i> Tambah Tugas
+                </button>
+
+                <div class="search-box">
+                    <i class='bx bx-search'></i>
+                    <input type="text" id="search-input" placeholder="Cari tugas...">
+                </div>
+                <div class="filter-box">
+                    <select id="filter-status">
+                        <option value="all">Semua Status</option>
+                        <option value="pending">Belum Selesai</option>
+                        <option value="completed">Selesai</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Task List Container -->
+            <div id="task-list" class="task-grid">
+                <!-- Task items will be injected here by JS -->
+                <!-- Example Empty State -->
+                <!-- <div class="empty-state">
+                    <i class='bx bx-clipboard'></i>
+                    <p>Belum ada tugas. Yuk tambah tugas baru!</p>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Form for Adding/Editing Tasks -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Tambah Tugas Baru</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="task-form">
+                    <input type="hidden" id="task-id">
+                    <div class="form-group">
+                        <label for="task-title">Judul Tugas / Proyek</label>
+                        <input type="text" id="task-title" placeholder="Contoh: Redesign Website UI" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-type">Tipe</label>
+                            <select id="task-type">
+                                <option value="kuliah">🎓 Tugas Kuliah</option>
+                                <option value="project">💼 Proyek Client</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-category">Kategori / Client</label>
+                            <input type="text" id="task-category" placeholder="Contoh: Pemrograman Web / PT. Maju"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-desc">Deskripsi & Catatan</label>
+                        <textarea id="task-desc" rows="3"
+                            placeholder="Detail tugas, spesifikasi, atau catatan penting..."></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-deadline">Deadline</label>
+                            <input type="date" id="task-deadline" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-status">Status</label>
+                            <select id="task-status">
+                                <option value="pending">⏳ Belum Selesai</option>
+                                <option value="completed">✅ Selesai</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary close-modal-btn">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan Data</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <!-- Left Column: Profile Image -->
+                <div class="about-img-col">
+                    <div class="img-wrapper">
+                        <!-- Using UI Avatars as placeholder -->
+                        <img src="img/foto_adi.jpg" alt="Adi Saputra" class="profile-photo">
+                        <div class="img-glow"></div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Content -->
+                <div class="about-text-col">
+                    <h2 class="about-title">Tentang Pembuat</h2>
+                    <h3 class="profile-name">Adi Saputra</h3>
+                    <p class="profile-role">Mahasiswa S1 Ilmu Komputer - Universitas Bumigora</p>
+
+                    <p class="bio-text">
+                        Saya adalah seorang pengembang teknologi dengan ketertarikan mendalam pada dunia
+                        <strong>Fullstack Development</strong>, <strong>IT Network</strong>,
+                        <strong>Cloud Computing</strong>, dan <strong>Machine Learning AI</strong>.
+                        Website ini adalah salah satu portfolio saya dalam menerapkan teknologi web modern.
+                    </p>
+
+                    <div class="skills-container">
+                        <span class="skill-badge"><i class='bx bx-code-alt'></i> Fullstack Dev</span>
+                        <span class="skill-badge"><i class='bx bx-network-chart'></i> IT Network</span>
+                        <span class="skill-badge"><i class='bx bx-cloud'></i> Cloud Computing</span>
+                        <span class="skill-badge"><i class='bx bx-brain'></i> Machine Learning AI</span>
+                    </div>
+
+                    <div class="social-connect">
+                        <a href="https://github.com/AdizxDev" target="_blank" class="social-btn github">
+                            <i class='bx bxl-github'></i> Github
+                        </a>
+                        <a href="https://www.linkedin.com/in/adi-saputra-670500298" target="_blank"
+                            class="social-btn linkedin">
+                            <i class='bx bxl-linkedin-square'></i> LinkedIn
+                        </a>
+                        <a href="https://www.instagram.com/adi_sptraamm?igsh=MTJ5cGlxd3QzZGkzNA==" target="_blank"
+                            class="social-btn instagram">
+                            <i class='bx bxl-instagram'></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-info">
+                <h4>ProTasker</h4>
+                <p>&copy; 2026 Developed by <strong>Adi Saputra</strong>. All rights reserved.</p>
+            </div>
+            <div class="footer-bottom-links">
+                <span>Mahasiswa S1 Ilmu Komputer</span>
+                <span>Universitas Bumigora</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
