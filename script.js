@@ -15,6 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
 
+    // Dashboard Elements
+    const totalTasksEl = document.getElementById('total-tasks');
+    const completedTasksEl = document.getElementById('completed-tasks');
+    const pendingTasksEl = document.getElementById('pending-tasks');
+
     // Inputs
     const taskIdInput = document.getElementById('task-id');
     const taskTitleInput = document.getElementById('task-title');
@@ -124,11 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    if (addTaskBtn) {
-        addTaskBtn.addEventListener('click', () => {
-            openModal();
-        });
-    }
+
 
     if (addTaskBtnInline) {
         addTaskBtnInline.addEventListener('click', () => {
@@ -270,7 +271,19 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
+    function updateStats() {
+        if (!totalTasksEl) return;
+        const total = tasks.length;
+        const completed = tasks.filter(t => t.status === 'completed').length;
+        const pending = tasks.filter(t => t.status === 'pending').length; // Correct logic
+
+        totalTasksEl.textContent = total;
+        completedTasksEl.textContent = completed;
+        pendingTasksEl.textContent = pending;
+    }
+
     function renderTasks() {
+        updateStats(); // Update dashboard
         if (!taskList) return;
         taskList.innerHTML = '';
 
